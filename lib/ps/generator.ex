@@ -35,7 +35,7 @@ defmodule Ps.Generator do
         # IO.inspect time
         t = DateTime.utc_now |> DateTime.to_unix(:millisecond)
         PsWeb.Endpoint.broadcast! "room:lobby", "new_msg", %{ body: n, data: d, time: t}
-        IO.inspect n
+        # IO.inspect n
         {:noreply, {n + 1, d}, 40}
     end
   end

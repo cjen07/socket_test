@@ -53,6 +53,8 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 socket.connect()
 
+var ttime;
+
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("room:lobby", {})
 
@@ -73,10 +75,17 @@ channel.on("new_msg", payload => {
   messageItem.innerText = `[${Date()}] ${timestamp - payload.time} ${payload.body}`
   messagesContainer.appendChild(messageItem)
   // console.log(payload.body)
+  let span = timestamp - ttime
+  let avg = span / payload.body
+  document.getElementById('stat').innerText = 
+    ("Time: " + span + " Count: " + payload.body + " Avg: " + avg)
 })
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
+  .receive("ok", resp => { 
+    ttime = new Date().getTime()
+    console.log("Joined successfully", resp) 
+  })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 export default socket
