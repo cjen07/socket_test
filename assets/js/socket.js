@@ -67,10 +67,10 @@ chatInput.addEventListener("keypress", event => {
 })
 
 channel.on("new_msg", payload => {
-  // let messageItem = document.createElement("li");
-  // messageItem.innerText = `[${Date()}] ${payload.body}`
-  // messagesContainer.appendChild(messageItem)
-  console.log(payload.body)
+  let messageItem = document.createElement("li");
+  messageItem.innerText = `[${Date()}] ${payload.body}`
+  messagesContainer.appendChild(messageItem)
+  // console.log(payload.body)
 })
 
 channel.join()
